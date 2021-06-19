@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from bubblesort import bubble_sort, changeRun, bubble_sort_step
-from quick_sort import quick_sort
+from quick_sort import *
 import random
 
 root = Tk()
@@ -57,17 +57,25 @@ def startAlgorithm():
     if not data: return
 # choose the algorithm function to call based on drop down menu input
     if(algMenu.get() == 'Quick Sort'):
-        quick_sort(data,0,len(data)-1, drawData,speedScale.get())
+        quick_sort(data, 0, len(data)-1, drawData, speedScale.get())
         drawData(data,['red' for x in range(len(data))])
 
     elif algMenu.get() == 'Bubble Sort':    
-         bubble_sort(data,drawData, time, speedScale.get())
+        bubble_sort(data,drawData, time, speedScale.get())
     
 
 def printNextStep():
     global nextStep 
-    bubble_sort_step(data,drawData)
-    changeRun(True)     
+    if algMenu.get() == 'Bubble Sort':
+        bubble_sort_step(data,drawData)
+        changeRun(True)     
+    elif algMenu.get() == 'Quick Sort':
+        quick_sort_step(data, 0, len(data)-1, drawData, speedScale.get())
+        drawData(data,['red' for x in range(len(data))])
+        changeRunQuick(True)     
+
+
+# User interface
 
 #frame/base layout
 UI_frame = Frame(root, width = 650, height = 200, bg = 'grey')
@@ -76,8 +84,6 @@ UI_frame.grid(row = 0, column =0, padx = 2, pady = 2)
 #bottom output screen
 canvas = Canvas(root, width = 600, height = 380, bg ='white')
 canvas.grid(row = 1, column =0, padx = 2, pady = 5)
-
-# User interface
 
 # first row
 Label(UI_frame, text = "Select \n Algorithm: ", bg = 'grey', font = 8).grid(row = 0, column = 0, padx = 1, pady = 5, sticky = E)
@@ -108,4 +114,3 @@ Button(UI_frame,text="Next Step", command = printNextStep, bg = "green", width =
 root.mainloop()
 
 
- 
