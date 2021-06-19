@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from bubblesort import bubble_sort, changeRun, bubble_sort_step
 from quick_sort import *
+from merge_sort import *
 import random
 
 root = Tk()
@@ -61,12 +62,14 @@ def startAlgorithm():
         return
 # choose the algorithm function to call based on drop down menu input
     if(algMenu.get() == 'Quick Sort'):
-        quick_sort(data, 0, len(data)-1, drawData, speedScale.get())
-        drawData(data, ['red' for x in range(len(data))])
-
+        quick_sort(data, 0, len(data)-1, drawData, time)
+        
     elif algMenu.get() == 'Bubble Sort':
         bubble_sort(data, drawData, time)
+    elif algMenu.get() == 'Merge Sort':
+        merge_sort(data, drawData, time)
 
+    drawData(data, ['green' for x in range(len(data))])
 
 def printNextStep():
     global nextStep
