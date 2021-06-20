@@ -19,6 +19,7 @@ pause = ''
 play = ''
 nextStep = ''
 timeip = 0
+cnt = 0
 tempData = []
 
 
@@ -56,8 +57,6 @@ def Generate():
         data.append(random.randrange(minVal, maxVal+1))
 
     tempData = copy.copy(data)
-    print(tempData)
-    print(data)
     drawData(data, ['red' for x in range(len(data))])
 
 
@@ -77,8 +76,8 @@ def startAlgorithm():
 
     drawData(data, ['green' for x in range(len(data))])
 
-
 # Restart algorithm
+
 
 def reStartAlgorithm():
     global tempData
@@ -88,16 +87,27 @@ def reStartAlgorithm():
 
 
 def printNextStep():
-    global nextStep
+    global nextStep, cnt
     if algMenu.get() == 'Bubble Sort':
         changeRun(True)
         bubble_sort_step(data, drawData)
 
     elif algMenu.get() == 'Quick Sort':
         changeRunQuick(True)
-        quick_sort_step(data, drawData)
-        # quick_sort_step(data, 0, len(data)-1, drawData)
-        drawData(data, ['red' for x in range(len(data))])
+        if cnt == 0:
+            quick_sort_step(data, 0, len(data)-1, drawData)
+            drawData(data, ['red' for x in range(len(data))])
+            cnt += 1
+        elif(cnt % 2 == 1):
+            quick_sort_left(drawData)
+            # drawData(retData, ['red' for x in range(len(retData))])
+            cnt += 1
+        # quick_sort_step(data, drawData)
+        elif(cnt % 2 == 0):
+            quick_sort_right(drawData)
+            # drawData(retData, ['red' for x in range(len(retData))])
+            cnt += 1
+        # drawData(retData, ['red' for x in range(len(retData))])
 
 
 # User interface
@@ -117,7 +127,7 @@ algMenu = ttk.Combobox(UI_frame, textvariable=selected_alg, values=[
 algMenu.grid(row=0, column=1, padx=0, pady=5)
 algMenu.current(0)
 
-speedScale = Scale(UI_frame, from_=0.1, to=2.0, length=100, digits=2,
+speedScale = Scale(UI_frame, from_=0.1, to=3.0, length=100, digits=2,
                    resolution=0.2, orient=HORIZONTAL, label="Select Delay(s)")
 speedScale.grid(row=0, column=2, padx=5, pady=5)
 Button(UI_frame, text="Start", command=startAlgorithm, bg="Red", width=10).grid(
