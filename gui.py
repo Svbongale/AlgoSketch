@@ -46,11 +46,12 @@ def drawData(data, colorArrary):
 
 def Generate():
     global data
+    global cnt
     global tempData
     minVal = int(minEntry.get())
     maxVal = int(maxEntry.get())
     size = int(sizeEntry.get())
-
+    cnt = 0
     data = []
 
     for _ in range(size):
@@ -82,6 +83,8 @@ def startAlgorithm():
 def reStartAlgorithm():
     global tempData
     global data
+    global cnt
+    cnt = 0
     data = copy.copy(tempData)
     drawData(data, ['red' for x in range(len(tempData))])
 

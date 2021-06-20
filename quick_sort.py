@@ -125,11 +125,13 @@ def quick_sort_step(data, head, tail, drawData):
 
 
 def quick_sort_left(drawData, head=0):
+    global partitionIndx
     quick_sort_step(retData, head, partitionIndx -
                     1, drawData)
 
 
 def quick_sort_right(drawData):
+    global partitionIndx
     tail = len(retData)-1
     quick_sort_step(retData, partitionIndx +
                     1, tail, drawData)
