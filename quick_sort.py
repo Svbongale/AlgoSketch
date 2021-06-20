@@ -66,6 +66,8 @@ def getColorArray(datalen, head, tail, border, curIndx, isSwapping=False):
 # Step by setp function
 # ************************************************
 running = False
+partitionIndx = 0
+retData = []
 cnt = 0
 
 
@@ -75,9 +77,10 @@ def changeRunQuick(run):
 
 
 def partition_step(data, head, tail, drawData, timeTick):
-    global running
+    global running, retData
     border = head
     pivot = data[tail]
+    retData = []
 
     drawData(data, getColorArray_step(len(data), head, tail, border, border))
     time.sleep(timeTick)
@@ -98,30 +101,38 @@ def partition_step(data, head, tail, drawData, timeTick):
     time.sleep(timeTick)
     data[border], data[tail] = data[tail], data[border]
     # running = False
-    return border, head
+    return border, data
 
 
-def quick_sort_step(data, drawData):
-    global cnt
+def quick_sort_step(data, head, tail, drawData):
+    global running, partitionIndx, retData, cnt
     if cnt == 0:
-        head = 0
-        tail = len(data)-1
-        cnt = cnt+1
-    global running
-    timeTick = 0.2
-    if running:
-        if head < tail:
-            partitionIndx, head = partition_step(
-                data, head, tail, drawData, timeTick)
-        # Left partition
-            running = False
-            if running:
-                quick_sort_step(data, head, partitionIndx -
-                                1, drawData, timeTick)
-        # Right partition
-                if running:
-                    quick_sort_step(data, partitionIndx+1,
-                                    tail, drawData, timeTick)
+        retData = data
+        cnt += 1
+    timeTick = 0.3
+    if head < tail:
+        partitionIndx, retData = partition_step(
+            retData, head, tail, drawData, timeTick)
+    # Left partition
+        # running = False
+        # if running:
+        #     quick_sort_step(retData, head, partitionIndx -
+        #                     1, drawData, timeTick)
+    # Right partition
+        # if running:
+        #     quick_sort_step(retData, partitionIndx+1,
+        #                     tail, drawData, timeTick)
+
+
+def quick_sort_left(drawData, head=0):
+    quick_sort_step(retData, head, partitionIndx -
+                    1, drawData)
+
+
+def quick_sort_right(drawData):
+    tail = len(retData)-1
+    quick_sort_step(retData, partitionIndx +
+                    1, tail, drawData)
 
 
 def getColorArray_step(datalen, head, tail, border, curIndx, isSwapping=False):
