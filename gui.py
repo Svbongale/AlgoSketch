@@ -3,6 +3,7 @@ from tkinter import ttk
 from bubblesort import bubble_sort, changeRun, bubble_sort_step
 from quick_sort import *
 from merge_sort import *
+import copy
 import random
 
 root = Tk()
@@ -18,6 +19,7 @@ pause = ''
 play = ''
 nextStep = ''
 timeip = 0
+tempData = []
 
 
 def drawData(data, colorArrary):
@@ -43,6 +45,7 @@ def drawData(data, colorArrary):
 
 def Generate():
     global data
+    global tempData
     minVal = int(minEntry.get())
     maxVal = int(maxEntry.get())
     size = int(sizeEntry.get())
@@ -52,6 +55,9 @@ def Generate():
     for _ in range(size):
         data.append(random.randrange(minVal, maxVal+1))
 
+    tempData = copy.copy(data)
+    print(tempData)
+    print(data)
     drawData(data, ['red' for x in range(len(data))])
 
 
@@ -63,13 +69,23 @@ def startAlgorithm():
 # choose the algorithm function to call based on drop down menu input
     if(algMenu.get() == 'Quick Sort'):
         quick_sort(data, 0, len(data)-1, drawData, time)
-        
+
     elif algMenu.get() == 'Bubble Sort':
         bubble_sort(data, drawData, time)
     elif algMenu.get() == 'Merge Sort':
         merge_sort(data, drawData, time)
 
     drawData(data, ['green' for x in range(len(data))])
+
+
+# Restart algorithm
+
+def reStartAlgorithm():
+    global tempData
+    global data
+    data = copy.copy(tempData)
+    drawData(data, ['red' for x in range(len(tempData))])
+
 
 def printNextStep():
     global nextStep
@@ -106,7 +122,8 @@ speedScale = Scale(UI_frame, from_=0.1, to=2.0, length=100, digits=2,
 speedScale.grid(row=0, column=2, padx=5, pady=5)
 Button(UI_frame, text="Start", command=startAlgorithm, bg="Red", width=10).grid(
     row=0, column=3, padx=5, pady=5, columnspan=2, sticky=N)
-
+Button(UI_frame, text="ReGenerate Data", command=reStartAlgorithm, bg="pink", width=15).grid(
+    row=0, column=3, padx=5, pady=5, columnspan=2, sticky=S)
 
 # Second Row
 # Data size
