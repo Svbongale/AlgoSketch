@@ -101,16 +101,21 @@ def printNextStep():
             quick_sort_step(data, 0, len(data)-1, drawData)
             drawData(data, ['red' for x in range(len(data))])
             cnt += 1
-        elif(cnt % 2 == 1):
+
+        elif cnt > 0:
             quick_sort_left(drawData)
             # drawData(retData, ['red' for x in range(len(retData))])
             cnt += 1
-        # quick_sort_step(data, drawData)
-        elif(cnt % 2 == 0):
-            quick_sort_right(drawData)
-            # drawData(retData, ['red' for x in range(len(retData))])
-            cnt += 1
-        # drawData(retData, ['red' for x in range(len(retData))])
+        # elif cnt % 2 == 1:
+        #     quick_sort_left(drawData)
+        #     # drawData(retData, ['red' for x in range(len(retData))])
+        #     cnt += 1
+        # # quick_sort_step(data, drawData)
+        # elif cnt % 2 == 0:
+        #     quick_sort_right(drawData)
+        #     # drawData(retData, ['red' for x in range(len(retData))])
+        #     cnt += 1
+        # # drawData(retData, ['red' for x in range(len(retData))])
 
 
 # User interface
