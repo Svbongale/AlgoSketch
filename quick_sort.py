@@ -124,17 +124,33 @@ def quick_sort_step(data, head, tail, drawData):
         #                     tail, drawData, timeTick)
 
 
+def quick_sort_step_later(data, head, tail, drawData):
+    global running, partitionIndx, retData, cnt
+    if cnt == 0:
+        retData = data
+        cnt += 1
+    timeTick = 0.3
+    if head < tail:
+        partitionIndx, retData = partition_step(
+            retData, head, tail, drawData, timeTick)
+    # Left partition
+    # running = False
+    # if running:
+        quick_sort_step_later(retData, head, partitionIndx-1, drawData)
+    # Right partition
+    # if running:
+        quick_sort_step_later(retData, partitionIndx+1, tail, drawData)
+
+
 def quick_sort_left(drawData, head=0):
     global partitionIndx
-    quick_sort_step(retData, head, partitionIndx -
-                    1, drawData)
+    quick_sort_step_later(retData, head, partitionIndx-1, drawData)
 
 
 def quick_sort_right(drawData):
     global partitionIndx
     tail = len(retData)-1
-    quick_sort_step(retData, partitionIndx +
-                    1, tail, drawData)
+    quick_sort_step(retData, partitionIndx+1, tail, drawData)
 
 
 def getColorArray_step(datalen, head, tail, border, curIndx, isSwapping=False):
