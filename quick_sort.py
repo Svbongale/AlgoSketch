@@ -86,8 +86,7 @@ def partition_step(data, head, tail, drawData, timeTick):
     time.sleep(timeTick)
     for j in range(head, tail):
         if data[j] < pivot:
-            drawData(data, getColorArray_step(
-                len(data), head, tail, border, j, True))
+            drawData(data, getColorArray_step(len(data), head, tail, border, j, True))
             time.sleep(timeTick)
             data[border], data[j] = data[j], data[border]
             border = border + 1
@@ -130,16 +129,18 @@ def quick_sort_step_later(data, head, tail, drawData):
         retData = data
         cnt += 1
     timeTick = 0.3
-    if head < tail:
-        partitionIndx, retData = partition_step(
-            retData, head, tail, drawData, timeTick)
+    
+    if partitionIndx-1<2: 
+            quick_sort_step_later(retData, partitionIndx+2, tail, drawData) 
+    elif head < tail:
+        partitionIndx, retData = partition_step(retData, head, tail, drawData, timeTick)
     # Left partition
     # running = False
     # if running:
         quick_sort_step_later(retData, head, partitionIndx-1, drawData)
     # Right partition
     # if running:
-        quick_sort_step_later(retData, partitionIndx+1, tail, drawData)
+        quick_sort_step_later(retData, partitionIndx+1, tail, drawData)        
 
 
 def quick_sort_left(drawData, head=0):

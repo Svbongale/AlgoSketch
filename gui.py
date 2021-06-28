@@ -3,6 +3,7 @@ from tkinter import ttk
 from bubblesort import bubble_sort, changeRun, bubble_sort_step
 from quick_sort import *
 from merge_sort import *
+from insertion_sort import *
 import copy
 import random
 
@@ -74,6 +75,8 @@ def startAlgorithm():
         bubble_sort(data, drawData, time)
     elif algMenu.get() == 'Merge Sort':
         merge_sort(data, drawData, time)
+    elif algMenu.get() == 'Insertion Sort':
+        insertion_sort(data, drawData, time)    
 
     drawData(data, ['green' for x in range(len(data))])
 
@@ -94,6 +97,11 @@ def printNextStep():
     if algMenu.get() == 'Bubble Sort':
         changeRun(True)
         bubble_sort_step(data, drawData)
+
+    elif algMenu.get() == 'Insertion Sort':
+        changeRun(True)
+        insertion_sort_step(data, drawData)
+
 
     elif algMenu.get() == 'Quick Sort':
         changeRunQuick(True)
@@ -116,7 +124,8 @@ def printNextStep():
         #     # drawData(retData, ['red' for x in range(len(retData))])
         #     cnt += 1
         # # drawData(retData, ['red' for x in range(len(retData))])
-
+    elif algMenu.get() == 'Quick Sort':
+        changeRunQuick(True)
 
 # User interface
 # frame/base layout
@@ -131,7 +140,7 @@ canvas.grid(row=1, column=0, padx=2, pady=5)
 Label(UI_frame, text="Select \n Algorithm: ", bg='grey', font=8).grid(
     row=0, column=0, padx=1, pady=5, sticky=E)
 algMenu = ttk.Combobox(UI_frame, textvariable=selected_alg, values=[
-                       'Bubble Sort', 'Quick Sort', 'Merge Sort'], width=15)
+                       'Bubble Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort'], width=15)
 algMenu.grid(row=0, column=1, padx=0, pady=5)
 algMenu.current(0)
 
