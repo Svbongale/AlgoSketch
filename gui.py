@@ -103,11 +103,12 @@ def printNextStep():
         bubble_sort_step(data, drawData)
 
     elif algMenu.get() == 'Insertion Sort':
-        changeRun(True)
+        changeRun_inserion(True)
         insertion_sort_step(data, drawData)
 
     elif algMenu.get() == 'Selection Sort':
-        changeRun(True)
+        changeRun_selection(True)
+        time.sleep(1)
         selection_sort_step(data, drawData)
 
 # User interface
