@@ -56,7 +56,6 @@ def Generate():
     cnt = 0
     data = []
 
-    # min 4, max 50, size 15, [15,50,4,17,6,49,22,50,38,37,34,41,43,48,17]
 
     for _ in range(size):
         data.append(random.randrange(minVal, maxVal+1))
@@ -108,7 +107,6 @@ def printNextStep():
 
     elif algMenu.get() == 'Selection Sort':
         changeRun_selection(True)
-        time.sleep(1)
         selection_sort_step(data, drawData)
 
 # User interface
